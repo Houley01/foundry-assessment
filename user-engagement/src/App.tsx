@@ -7,9 +7,9 @@ import React from 'react'
 // Imports for routing table
 import NavBar from './components/navBar'
 import Home from './components/home'
-import Client from './components/clients/client'
-import Employee from './components/employees/employee'
-import Engagment from './components/engagment/engagment'
+import Client from './components/client'
+import Employee from './components/employee'
+import Engagment from './components/engagment'
 // Import for routes
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 // Bootstrap Styling

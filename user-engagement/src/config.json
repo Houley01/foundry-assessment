@@ -1,0 +1,6 @@
+{
+  "databaseHost": "http://localhost:5000",
+  "client": "/clients/",  
+  "employee": "/employees/",
+  "engagment": "/engagements/"
+}
