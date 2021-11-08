@@ -1,23 +1,37 @@
 import React, { useEffect, useState } from "react";
-import configJSON from '../config.json'
+import configJSON from '../config.json';
 import { Human } from "./customTypes";
-
+// import modal from "./modal/mondal";
+import './forms/apiCalls';
+import { GetHumans, PostHuman } from "./forms/apiCalls";
+// function NewEmpolyee(e) {
+    
+// }
 function Employee() {
 
-    // function editButton(e) {
-    //     ``
-    // }
+    function editButton() {
+    }
 
-    function newEmpolyee() {
+    
+    function deleteButton() {
 
+    }
+
+    const [newHuman, setNewHuman] = useState("");
+    const handleSubmit  = (event: any) => {
+        event.preventDefault();
+        PostHuman(newHuman, configJSON.newEmployee);
+        window.location.reload();
     }
 
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [employeesData, setEmployeesData] = useState<Human[]>([]);
+    
+
 
     useEffect(() => {
-        fetch(configJSON.databaseHost + configJSON.client)
+        fetch(configJSON.databaseHost + configJSON.employee)
             .then(res => res.json())
             .then(
                 (result) => {
@@ -41,8 +55,21 @@ function Employee() {
     }
     else {
         return (
-            // parent div to hold the ul and li's
+            <div>
+            <form onSubmit={handleSubmit}>
+                <label>Enter your name:
+                    <input
+                        type="text"
+                        value={newHuman}
+                        onChange={(e) => setNewHuman(e.target.value)}
+                    />
+                </label>
+                <input type="submit" />
+            </form>
+
+            {/* // Table  */}
             <div className="EmployeeTable">
+                {/* <button onClick={NewEmpolyee}>Add new employee</button> */}
                 <h1>Employee's of BB</h1>
                 <table>
                     <thead>
@@ -60,12 +87,13 @@ function Employee() {
                             <td> </td>
                             <td>{employee.id} </td>
                             <td>{employee.name} </td>
-                            <td><button>Edit</button></td>
-                            <td><button>Delete</button></td>
+                            <td><button onClick={editButton} >Edit</button></td>
+                            <td><button onClick={deleteButton} >Delete</button></td>
                         </tr>
                     ))}
                 </tbody>
                 </table>
+            </div>
             </div>
         );
     }

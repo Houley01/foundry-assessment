@@ -9,6 +9,10 @@ function Client() {
     return (
         <div className="Client">
             <h1>Client</h1>
+            {/* <InputGroup className="mb-3">
+                <InputGroup.Text id="basic addon1">Search 🔍</InputGroup.Text>
+                <FormControl id="search" />
+            </InputGroup> */}
         </div>
     )
 }

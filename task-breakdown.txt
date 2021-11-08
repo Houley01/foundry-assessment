@@ -16,9 +16,5 @@
     o Ability to list engagements by employee
     o Ability to list engagements by client
 
-• Home page
-    o View a current engagement
-    o Easy access to other pages
-
 Additionally:
 • Write a brief user guide explaining how to use the app (no more than a page)
