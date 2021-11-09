@@ -4,12 +4,10 @@ import configJSON from '../config.json';
 import { Human } from "./customTypes";
 import './forms/apiCalls';
 import { DeleteHuman, GetHumans, PostHuman, UpdateHuman } from "./forms/apiCalls";
-// function NewEmpolyee(e) {
-    
-// }
+
 function Employee() {
     const [tempHuman, setTempHuman] = useState<Human>({ "id": "", "name": "" });
-    
+    // const [isSearch, setIsSearch] = useState(false);
     // ===== EDIT \/ ======
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -52,6 +50,38 @@ function Employee() {
         window.location.reload();
     }
     // ===== New Employee ======
+    // const handleSearch = () => 
+    const [searchTable, setSearchTable] = useState<Human[]>([]);
+
+    
+    function filterTable(searchKey: string) {
+        var temp: Human[] = [];
+       
+        if (searchKey.length === 0) {
+            // setIsSearch(false);
+            setSearchTable(employeesData);
+            return
+        } else {
+            // setIsSearch(true);
+            employeesData.forEach(element => {
+                // console.log("Name: "+ element.name + " " + element.name.toLowerCase().includes(searchKey));
+
+                if (element.name.toLowerCase().includes(searchKey)) {
+                    temp.push(element);
+                    // console.log("FOUND ID: " + element.id + " name: " + element.name)
+                }
+            });
+        }
+        // DEBUG::
+        // console.log("search key: " + searchKey);
+        
+        // temp.forEach(element => {
+            
+        //     console.log("Temp after search:" + element.name);
+        // });
+        return setSearchTable(temp);
+    }
+    
 
     // ===== Employee  \/ ======
 
@@ -65,7 +95,8 @@ function Employee() {
             .then(
                 (result) => {
                     setIsLoaded(true);
-                    setEmployeesData(result);
+                    setEmployeesData(result); // used as the orgianl source of data
+                    setSearchTable(result);
                 },
                 // Note: it's important to handle errors here
                 // instead of a catch() block so that we don't swallow
@@ -98,7 +129,8 @@ function Employee() {
 
                 {/* // Table  */}
                 <div className="EmployeeTable">
-                    {/* <button onClick={NewEmpolyee}>Add new employee</button> */}
+                    <label >Search table: </label>
+                    <input type="text" onChange={(e) => filterTable(e.target.value)}/>
                     <h1>Employee's of BB</h1>
                     <table>
                         <thead>
@@ -111,7 +143,8 @@ function Employee() {
                             </tr>    
                     </thead>
                     <tbody>
-                        {employeesData.map((employee) => (
+                        { 
+                        searchTable.map((employee) => (
                             <tr key={employee.id}>
                                 <td> </td>
                                 <td>{employee.id} </td>

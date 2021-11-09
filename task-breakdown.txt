@@ -1,7 +1,7 @@
-• Employees
-    o View a list of employees 
-    o Ability to add/view/edit/delete employees
-    o Ability to filter the list of employees by any relevant field (e.g. name)
+• Employees 
+ [DONE]   o View a list of employees
+ [DONE]   o Ability to add/view/edit/delete employees 
+ [DONE]   o Ability to filter the list of employees by any relevant field (e.g. name)
 
 • Clients
     o View a list of clients
