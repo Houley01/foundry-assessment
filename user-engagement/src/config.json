@@ -1,7 +1,7 @@
 {
   "databaseHost": "http://localhost:5000",
   "client": "/clients/",
-  "newClient":"POST: localhost:5000/clients?",
+  "newClient":"localhost:5000/clients?",
   "employee": "/employees/",
   "newEmployee":"http://localhost:5000/employees?",
   "engagment": "/engagements/"

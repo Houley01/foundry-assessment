@@ -53,12 +53,38 @@ function GetHumans() {
     // return []
 }
 
-function UpdateHumans() {
-    
-}
+async function UpdateHuman(data: Human, url: string) {
+    if (!data.name || data.name.length !== 0) {
+        console.log(data);
+        console.log(url + data.id)
+        fetch(url + data.id, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name: data.name}),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+
+                return data;
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                return -1;
+            });
+    } else {
+        alert("Please enter a name");
+        return -1;
+    }
+
+} 
+
+
 export {
     PostHuman, 
     GetHumans,
-    UpdateHumans
+    UpdateHuman
 
 }
