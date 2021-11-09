@@ -55,8 +55,6 @@ function GetHumans() {
 
 async function UpdateHuman(data: Human, url: string) {
     if (!data.name || data.name.length !== 0) {
-        console.log(data);
-        console.log(url + data.id)
         fetch(url + data.id, {
             method: 'PUT',
             headers: {
@@ -75,16 +73,39 @@ async function UpdateHuman(data: Human, url: string) {
                 return -1;
             });
     } else {
-        alert("Please enter a name");
-        return -1;
+       return -1
     }
 
 } 
+//  I could not get the type to function correctly
+// async function DeleteHuman(data: Human, url: string) { 
+// Instead just pass the idea instead of the human type 
+async function DeleteHuman (id: string, name: string, url: string) {
+    let isDelete = window.confirm("Are you sure you want to delete: " + name);
+    if (isDelete) {
+        fetch(url + id, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
 
+                return data;
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                return -1;
+            });
+    }
+}
 
 export {
     PostHuman, 
     GetHumans,
-    UpdateHuman
+    UpdateHuman,
+    DeleteHuman
 
 }

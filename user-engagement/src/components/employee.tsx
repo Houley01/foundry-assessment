@@ -3,35 +3,44 @@ import { Modal } from "react-bootstrap";
 import configJSON from '../config.json';
 import { Human } from "./customTypes";
 import './forms/apiCalls';
-import { GetHumans, PostHuman, UpdateHuman } from "./forms/apiCalls";
+import { DeleteHuman, GetHumans, PostHuman, UpdateHuman } from "./forms/apiCalls";
 // function NewEmpolyee(e) {
     
 // }
 function Employee() {
-
+    const [tempHuman, setTempHuman] = useState<Human>({ "id": "", "name": "" });
+    
     // ===== EDIT \/ ======
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
-    const [editHuman, setEditHuman] = useState<Human>({ "id": "", "name": "" });
 
     function editButton(id: string, name: string ) {
         console.log("ID: " + id + " name: " + name)
-        setEditHuman({
+        setTempHuman({
             "id": id, "name": name
-        });
+        });     
         setShow(true);
     }
 
     const handleEditSubmit = (event: any) => {
         event.preventDefault();
-        UpdateHuman(editHuman, configJSON.databaseHost + configJSON.employee);
-        // window.location.reload();
+        UpdateHuman(tempHuman, configJSON.employee);
+        window.location.reload();
     }
     // ===== EDIT /\ ======
 
     // ===== Delete \/ ======
-    function deleteButton() {
+    function DeleteButton(id: string, name: string) {
+        setTempHuman({
+            "id": id, "name": name
+        });
 
+        
+        // console.log("id: " + id + "name " + name);
+        // console.log(tempHuman);
+        // DeleteHuman(tempHuman, configJSON.employee);
+        DeleteHuman(id, name, configJSON.employee);
+        window.location.reload();
     }
     // ===== Delete /\ ======
 
@@ -51,7 +60,7 @@ function Employee() {
     const [employeesData, setEmployeesData] = useState<Human[]>([]);
    
     useEffect(() => {
-        fetch(configJSON.databaseHost + configJSON.employee)
+        fetch(configJSON.employee)
             .then(res => res.json())
             .then(
                 (result) => {
@@ -108,7 +117,7 @@ function Employee() {
                                 <td>{employee.id} </td>
                                 <td>{employee.name} </td>
                                 <td><button onClick={() => editButton(employee.id, employee.name)} >Edit</button></td>
-                                <td><button onClick={deleteButton} >Delete</button></td>
+                                <td><button onClick={() => DeleteButton(employee.id, employee.name)} >Delete</button></td>
                             </tr>
                         ))}
                     </tbody>
@@ -125,8 +134,8 @@ function Employee() {
                 <Modal.Body> 
                     <p>Update Employee Name</p>
                         <form onSubmit={handleEditSubmit}>
-                        <input type="text" value={editHuman.name} onChange={(e) => 
-                            setEditHuman({"id": editHuman.id, "name": e.target.value})}/>
+                        <input type="text" value={tempHuman.name} onChange={(e) => 
+                            setTempHuman({"id": tempHuman.id, "name": e.target.value})}/>
                         <input type="submit" />
                     </form>
                 </Modal.Body>
