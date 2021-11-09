@@ -59,11 +59,11 @@ function Employee() {
        
         if (searchKey.length === 0) {
             // setIsSearch(false);
-            setSearchTable(employeesData);
+            setSearchTable(humansData);
             return
         } else {
             // setIsSearch(true);
-            employeesData.forEach(element => {
+            humansData.forEach(element => {
                 // console.log("Name: "+ element.name + " " + element.name.toLowerCase().includes(searchKey));
 
                 if (element.name.toLowerCase().includes(searchKey)) {
@@ -87,7 +87,7 @@ function Employee() {
 
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [employeesData, setEmployeesData] = useState<Human[]>([]);
+    const [humansData, setEmployeesData] = useState<Human[]>([]);
    
     useEffect(() => {
         fetch(configJSON.employee)
@@ -144,13 +144,13 @@ function Employee() {
                     </thead>
                     <tbody>
                         { 
-                        searchTable.map((employee) => (
-                            <tr key={employee.id}>
+                        searchTable.map((human) => (
+                            <tr key={human.id}>
                                 <td> </td>
-                                <td>{employee.id} </td>
-                                <td>{employee.name} </td>
-                                <td><button onClick={() => editButton(employee.id, employee.name)} >Edit</button></td>
-                                <td><button onClick={() => DeleteButton(employee.id, employee.name)} >Delete</button></td>
+                                <td>{human.id} </td>
+                                <td>{human.name} </td>
+                                <td><button onClick={() => editButton(human.id, human.name)} >Edit</button></td>
+                                <td><button onClick={() => DeleteButton(human.id, human.name)} >Delete</button></td>
                             </tr>
                         ))}
                     </tbody>
