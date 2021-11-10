@@ -1,5 +1,5 @@
 import configJSON from '../../config.json';
-import { Human, Engagements } from "../customTypes";
+import { Human, Engagement } from "../customTypes";
 
 
 async function PostHuman(name: string, url: string) {
@@ -101,11 +101,34 @@ async function DeleteHuman (id: string, name: string, url: string) {
             });
     }
 }
+//  engagments 
+// async function GetEngagments() {
+//     var temp;
+//     fetch(configJSON.engagment)
+//         .then(response => response.json())
+//         .then(result => console.log(result))
+//         .then(result => temp = result)
+//         .catch(error => console.log('error', error));
+//     return temp; 
+// }
+
+async function PostEngagment() {}
+
+async function PutEngagment(data: Engagement) {}
+
+async function EndEngagment(id: string) { 
+
+}
+
 
 export {
     PostHuman, 
     GetHumans,
     UpdateHuman,
-    DeleteHuman
+    DeleteHuman,
+    // GetEngagments,
+    PostEngagment,
+    PutEngagment,
+    EndEngagment
 
 }

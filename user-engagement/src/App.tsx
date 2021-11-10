@@ -9,7 +9,7 @@ import NavBar from './components/navBar'
 import Home from './components/home'
 import Client from './components/client'
 import Employee from './components/employee'
-import Engagment from './components/engagment'
+import DisplayEngagement  from './components/engagment'
 // Import for routes
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 // Bootstrap Styling
@@ -26,7 +26,7 @@ function App() {
             <Route exact path="/"> <Home /> </Route>
             <Route path="/client"> <Client /> </Route>
             <Route path="/employee"> <Employee /> </Route>
-            <Route path="/engagment"> <Engagment /> </Route>
+            <Route path="/engagment"> <DisplayEngagement /> </Route>
           </Switch>
         </div>
       </Router>
