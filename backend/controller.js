@@ -102,6 +102,12 @@ clientService.create('BOCO')
 clientService.create('CASE')
 
 const bobAcmeEngagement = engagementService.create('DOING STUFF', acme.id, bob.id)
+engagementService.create('aaa', acme.id, bob.id, 'GDAY')
+engagementService.create('bbb', acme.id, bob.id, 'Hello')
+engagementService.create('ccc', acme.id, bob.id, 'King')
+engagementService.create('ddd', acme.id, bob.id, 'Queen')
+engagementService.create('eee', acme.id, bob.id, 'ALPHA')
+
 
 module.exports = {
   engagementService,

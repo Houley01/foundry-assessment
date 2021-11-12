@@ -1,5 +1,5 @@
 import configJSON from '../../config.json';
-import { Human, Engagement } from "../customTypes";
+import { Human, Engagement, PreEngagement, NewEngagement } from "../customTypes";
 
 
 async function PostHuman(name: string, url: string) {
@@ -31,28 +31,25 @@ async function PostHuman(name: string, url: string) {
     }
 
 } 
+// let tempJob = {
+//     "id": element.id,
+//     "name": element.name,
+//     "client": tempClient,
+//     "employee": tempEmployee,
+//     "description": element.description,
+//     "started": element.started,
+//     "ended": element?.ended
+// }
 
-
-function GetHumans() {
-
-    // fetch(configJSON.databaseHost + configJSON.client)
-    //     .then(res => res.json())
-    //     .then(
-    //         (result) => {
-    //             setIsLoaded(true);
-    //             setEmployeesData(result);
-    //         },
-    //         // Note: it's important to handle errors here
-    //         // instead of a catch() block so that we don't swallow
-    //         // exceptions from actual bugs in components.
-    //         (error) => {
-    //             setIsLoaded(true);
-    //             setError(error);
-    //         }
-    //     )
-    // return []
+function GetHumans(url: string) {
+    let data: Human[] = []
+    fetch(url).then(res => res.json()).then((res) => data = data) ;
+    return data;
 }
-
+function GetHumanId(url: string, id: string) {
+    // let data: Human = {"id": "", "name":""};
+    return fetch(url+id).then(res => res.json())
+}
 async function UpdateHuman(data: Human, url: string) {
     if (!data.name || data.name.length !== 0) {
         fetch(url + data.id, {
@@ -102,22 +99,24 @@ async function DeleteHuman (id: string, name: string, url: string) {
     }
 }
 //  engagments 
-// async function GetEngagments() {
-//     var temp;
-//     fetch(configJSON.engagment)
-//         .then(response => response.json())
-//         .then(result => console.log(result))
-//         .then(result => temp = result)
-//         .catch(error => console.log('error', error));
-//     return temp; 
-// }
+async function GetEngagements() {
+    let temp: PreEngagement[] = [];
+    fetch(configJSON.engagment).then((res) => res.json()).then((res) => temp = res);
+    return temp; 
+}
 
-async function PostEngagment() {}
+async function PostEngagment(data: NewEngagement) {
+    console.log("POST: ")
+    console.table(data);
+}
 
-async function PutEngagment(data: Engagement) {}
+async function PutEngagment(data: Engagement) {
+    console.log("PUT: ")
+    console.table(data);
+}
 
 async function EndEngagment(id: string) { 
-
+    console.log("End Engagement: " + id );
 }
 
 
@@ -126,7 +125,8 @@ export {
     GetHumans,
     UpdateHuman,
     DeleteHuman,
-    // GetEngagments,
+    GetHumanId,
+    GetEngagements,
     PostEngagment,
     PutEngagment,
     EndEngagment

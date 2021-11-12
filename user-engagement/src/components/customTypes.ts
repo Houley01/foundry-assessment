@@ -12,7 +12,12 @@ export type PreEngagement = {
     started: Date;
     ended?: Date;
 }
-
+export type NewEngagement = {
+    name: string;
+    client: string;
+    employee: string;
+    description: string;
+}
 export type Engagement = {
     id: string;
     name: string;
