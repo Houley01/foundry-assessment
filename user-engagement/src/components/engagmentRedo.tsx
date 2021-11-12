@@ -7,8 +7,7 @@ import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import configJSON from '../config.json';
 import { Engagement, Human, NewEngagement, PreEngagement } from "./customTypes";
-import './forms/apiCalls';
-import { DeleteHuman, EndEngagment, GetHumanId, GetHumans, PostEngagment, PostHuman, UpdateHuman } from "./forms/apiCalls";
+import { DeleteEngagement, DeleteHuman, EndEngagment, GetHumanId, GetHumans, PostEngagment, PostHuman, UpdateHuman } from "./forms/apiCalls";
 
 function DisplayEngagement() {
     const [clientList, setClientList] = useState<Human[]>([]);
@@ -59,13 +58,6 @@ function DisplayEngagement() {
         PostEngagment(data);
         // window.location.reload();
     }
-
-    // ===== Delete \/ ======
-    function DeleteButton(id: string, name: string) {
-        // INSERT
-        window.location.reload();
-    }
-    // ===== Delete /\ ======
 
     // ===== New Client \/ ======
     const [newHuman, setNewHuman] = useState("");
@@ -188,7 +180,7 @@ function DisplayEngagement() {
                                         <td>{obj.started} </td>
                                         <td>{obj.ended} </td>
                                         <td><button onClick={() => editButton(obj.id, obj.name)} >Edit</button></td>
-                                        <td><button onClick={() => DeleteButton(obj.id, obj.name)} >Delete</button></td>
+                                        <td><button onClick={() => DeleteEngagement(obj.id, obj.name)} >Delete</button></td>
                                         <td><button onClick={() => EndEngagment(obj.id)}>End Engagement</button></td>
                                     </tr>
                                 ))}

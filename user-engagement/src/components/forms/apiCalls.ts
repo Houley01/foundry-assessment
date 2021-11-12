@@ -108,6 +108,20 @@ async function GetEngagements() {
 async function PostEngagment(data: NewEngagement) {
     console.log("POST: ")
     console.table(data);
+    fetch(configJSON.engagment, {
+        method: 'POST', 
+        headers: {
+            'Content-Type': 'application/json'
+        }, 
+        body: JSON.stringify(data),
+    }).then(response => response.json())
+        .then(resData => {
+            console.log('Success:', resData);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+
 }
 
 async function PutEngagment(data: Engagement) {
@@ -117,6 +131,43 @@ async function PutEngagment(data: Engagement) {
 
 async function EndEngagment(id: string) { 
     console.log("End Engagement: " + id );
+    fetch(configJSON.engagment + id + "/end", {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            window.location.reload();
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+}
+
+async function DeleteEngagement(id: string, name: string) {
+    let isDelete = window.confirm("Are you sure you want to delete: " + name);
+    if (isDelete) {
+        fetch(configJSON.engagment + id, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+
+                return data;
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                return -1;
+            });
+    }
+    window.location.reload();
 }
 
 
@@ -129,6 +180,7 @@ export {
     GetEngagements,
     PostEngagment,
     PutEngagment,
-    EndEngagment
+    EndEngagment,
+    DeleteEngagement
 
 }
