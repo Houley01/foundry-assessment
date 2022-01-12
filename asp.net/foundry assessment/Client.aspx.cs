@@ -7,38 +7,31 @@ using System.Web.UI.WebControls;
 using foundry_assessment.models;
 using System.Net.Http;
 using Newtonsoft.Json;
+using foundry_assessment.controller;
+using System.Threading.Tasks;
+
 namespace foundry_assessment
 {
     public partial class Client : System.Web.UI.Page
     {
+        ClientsApi clientsApi = new ClientsApi();
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Create a object 
-            IEnumerable<ClientsClass> clients = null;
-            // Build the HTTP Client info
-            HttpClient hClient = new HttpClient();
-            hClient.BaseAddress = new Uri("http://localhost:5000/");
-
-            // Wait for API Call to get data 
-            var consumeAPI = hClient.GetAsync("clients");
-            consumeAPI.Wait();
-
-            var readData = consumeAPI.Result;
-            if (readData.IsSuccessStatusCode)
-            {
-                // Convert Json Data Input into C# Objects
-                var jsonString = readData.Content.ReadAsStringAsync();
-                var ClientsList = JsonConvert.DeserializeObject<List<ClientsClass>>(jsonString.Result);
-                Console.WriteLine(ClientsList);
-
-                // Populate gridview
-                GridViewClients.DataSource = ClientsList;
-                GridViewClients.DataBind();
-
-            }
+            GetDataForGridView();
         }
 
-        protected void Insert() { }
+        protected void Insert(object sender, EventArgs eventArgs) {
+            ClientName tempName = new ClientName();
+            tempName.name = txtName.Text;
+            ClientsApi clientsApi = new ClientsApi();
+            var statusCode = clientsApi.CreateClient(tempName);
+            if (statusCode == System.Net.HttpStatusCode.OK)
+            {
+                txtName.Text = null;
+                GetDataForGridView();
+            }
+            
+        }
 
         protected void OnRowEditing() { }
 
@@ -46,10 +39,28 @@ namespace foundry_assessment
 
         protected void OnRowUpdating() { }
 
-        protected void OnRowDeleting(object sender, GridViewDeleteEventArgs e) 
+        protected async void OnRowDeleting(object sender, GridViewDeleteEventArgs e) 
         {
-            string id = (string)GridViewClients.DataKeys[e.RowIndex].Values[0];
-            Console.WriteLine(id);
+            try {
+                string id = (string)GridViewClients.DataKeys[e.RowIndex].Values[0];
+                Console.WriteLine(id);
+                ClientsApi clientsApi = new ClientsApi();
+                var statusCode = await clientsApi.DeleteClient(id);
+                this.GetDataForGridView();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
+        }
+
+        private void GetDataForGridView()
+        {   
+            var ClientsList = clientsApi.ReadClients();
+            // Populate gridview
+            GridViewClients.DataSource = ClientsList;
+            GridViewClients.DataBind();
         }
     }
 }

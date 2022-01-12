@@ -10,4 +10,8 @@ namespace foundry_assessment.models
         public string id { get; set; }
         public string name { get; set; }
     }
+    public class ClientName
+    {
+        public string name { get; set; }
+    }
 }
