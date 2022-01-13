@@ -22,7 +22,7 @@ namespace foundry_assessment.controller
 
 
             //Needing to test this
-            public HttpStatusCode CreateClient(ClientName clientName)
+            public HttpStatusCode CreateClient(EmployeeName clientName)
         {
             HttpClient httpClient = new HttpClient();
             string jsonInput = JsonConvert.SerializeObject(clientName);
@@ -55,11 +55,25 @@ namespace foundry_assessment.controller
             return ClientsList;
         }
 
-        //public async Task<HttpStatusCode> UpdateClient(string clientId) { }
+        public HttpStatusCode UpdateClient(ClientsClass client)
+        {
+            HttpClient httpClient = new HttpClient();
+            EmployeeName clientName= new EmployeeName();
+            clientName.name = client.name;
+            string jsonInput = JsonConvert.SerializeObject(clientName);
+            var content = new StringContent(jsonInput, Encoding.UTF8, "application/json");
+            var results = httpClient.PutAsync(baseUrl + clientsURL + client.id, content).Result;
+            Console.WriteLine(results.StatusCode);
+            httpClient.Dispose();
+            return results.StatusCode;
+        }
         public async Task<HttpStatusCode> DeleteClient(string clientId)
         {
+            HttpClient httpClient = new HttpClient();
             HttpResponseMessage response = await httpClient.DeleteAsync(baseUrl + clientsURL + clientId);
+            httpClient.Dispose();
             return response.StatusCode;
         }
+
     }
 }

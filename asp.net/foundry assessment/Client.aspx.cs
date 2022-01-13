@@ -21,7 +21,7 @@ namespace foundry_assessment
         }
 
         protected void Insert(object sender, EventArgs eventArgs) {
-            ClientName tempName = new ClientName();
+            EmployeeName tempName = new EmployeeName();
             tempName.name = txtName.Text;
             ClientsApi clientsApi = new ClientsApi();
             var statusCode = clientsApi.CreateClient(tempName);
@@ -33,20 +33,46 @@ namespace foundry_assessment
             
         }
 
-        protected void OnRowEditing() { }
+        protected void OnRowEditing(object sender, GridViewEditEventArgs eventArgs) 
+        {
+            GridViewClients.EditIndex = eventArgs.NewEditIndex;
+            GetDataForGridView();
+        }
 
-        protected void OnRowCancelingEdit() { }
+        protected void OnRowCancelingEdit(object sender, EventArgs eventArgs) 
+        { 
+            GridViewClients.EditIndex = -1;
+            GetDataForGridView();
+        }
 
-        protected void OnRowUpdating() { }
+        protected void OnRowUpdating(object sender, GridViewUpdateEventArgs eventArgs) 
+        {
+            try
+            {
+                GridViewRow row = GridViewClients.Rows[eventArgs.RowIndex];
+                ClientsClass clientsClass = new ClientsClass();
+                clientsClass.id = (string)GridViewClients.DataKeys[eventArgs.RowIndex].Values[0];
+                clientsClass.name = (row.FindControl("txtName") as TextBox).Text;
+                //Console.WriteLine(clientsClass);
+                ClientsApi clientsApi = new ClientsApi();
+                clientsApi.UpdateClient(clientsClass);
 
-        protected async void OnRowDeleting(object sender, GridViewDeleteEventArgs e) 
+                GridViewClients.EditIndex = -1;
+                GetDataForGridView();
+            } catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        protected async void OnRowDeleting(object sender, GridViewDeleteEventArgs eventArgs) 
         {
             try {
-                string id = (string)GridViewClients.DataKeys[e.RowIndex].Values[0];
+                string id = (string)GridViewClients.DataKeys[eventArgs.RowIndex].Values[0];
                 Console.WriteLine(id);
                 ClientsApi clientsApi = new ClientsApi();
                 var statusCode = await clientsApi.DeleteClient(id);
-                this.GetDataForGridView();
+                GetDataForGridView();
             }
             catch (Exception ex)
             {
