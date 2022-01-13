@@ -14,14 +14,14 @@ namespace foundry_assessment
 {
     public partial class Client : System.Web.UI.Page
     {
-        ClientsApi clientsApi = new ClientsApi();
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             GetDataForGridView();
         }
 
         protected void Insert(object sender, EventArgs eventArgs) {
-            EmployeeName tempName = new EmployeeName();
+            ClientName tempName = new ClientName();
             tempName.name = txtName.Text;
             ClientsApi clientsApi = new ClientsApi();
             var statusCode = clientsApi.CreateClient(tempName);
@@ -82,7 +82,8 @@ namespace foundry_assessment
         }
 
         private void GetDataForGridView()
-        {   
+        {
+            ClientsApi clientsApi = new ClientsApi();
             var ClientsList = clientsApi.ReadClients();
             // Populate gridview
             GridViewClients.DataSource = ClientsList;

@@ -10,36 +10,36 @@ using System.Net.Http.Headers;
 
 namespace foundry_assessment.controller
 {
-    public class ClientsApi
+    public class EmployeeApi
     {
         // Build the HTTP Client info
         readonly string baseUrl = "http://localhost:5000";
         readonly string clientsURL = "/clients/";
-        readonly string EmployeesURL = "/employees/";
+        readonly string employeesURL = "/employees/";
         readonly string engagementsURL = "/engagements/";
 
         //HttpClient httpClient = new HttpClient();
 
 
             //Needing to test this
-            public HttpStatusCode CreateClient(ClientName clientName)
+            public HttpStatusCode CreateEmployee(EmployeeName employeeName)
         {
             HttpClient httpClient = new HttpClient();
-            string jsonInput = JsonConvert.SerializeObject(clientName);
+            string jsonInput = JsonConvert.SerializeObject(employeeName);
             var content = new StringContent(jsonInput, Encoding.UTF8, "application/json");
-            var results = httpClient.PostAsync(baseUrl + clientsURL, content).Result;
+            var results = httpClient.PostAsync(baseUrl + employeesURL, content).Result;
             return results.StatusCode;
         }
 
-        public List<ClientsClass> ReadClients() 
+        public List<EmployeeClass> ReadEmployees() 
         {
-            List<ClientsClass> ClientsList = new List<ClientsClass>();
+            List<EmployeeClass> employeeList = new List<EmployeeClass>();
             // Build the HTTP Client info
             HttpClient httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("http://localhost:5000/");
+            httpClient.BaseAddress = new Uri(baseUrl);
 
             // Wait for API Call to get data 
-            var consumeAPI = httpClient.GetAsync("clients");
+            var consumeAPI = httpClient.GetAsync("employees");
             consumeAPI.Wait();
 
             var readData = consumeAPI.Result;
@@ -47,30 +47,30 @@ namespace foundry_assessment.controller
             {
                 // Convert Json Data Input into C# Objects
                 var jsonString = readData.Content.ReadAsStringAsync();
-                ClientsList = JsonConvert.DeserializeObject<List<ClientsClass>>(jsonString.Result);
-                Console.WriteLine(ClientsList);
+                employeeList = JsonConvert.DeserializeObject<List<EmployeeClass>>(jsonString.Result);
+                Console.WriteLine(employeeList);
             }
             consumeAPI.Dispose();
             httpClient.Dispose();
-            return ClientsList;
+            return employeeList;
         }
 
-        public HttpStatusCode UpdateClient(ClientsClass client)
+        public HttpStatusCode UpdateEmployee(EmployeeClass employee)
         {
             HttpClient httpClient = new HttpClient();
-            ClientName clientName= new ClientName();
-            clientName.name = client.name;
-            string jsonInput = JsonConvert.SerializeObject(clientName);
+            EmployeeName employeeName= new EmployeeName();
+            employeeName.name = employee.name;
+            string jsonInput = JsonConvert.SerializeObject(employeeName);
             var content = new StringContent(jsonInput, Encoding.UTF8, "application/json");
-            var results = httpClient.PutAsync(baseUrl + clientsURL + client.id, content).Result;
+            var results = httpClient.PutAsync(baseUrl + employeesURL + employee.id, content).Result;
             Console.WriteLine(results.StatusCode);
             httpClient.Dispose();
             return results.StatusCode;
         }
-        public async Task<HttpStatusCode> DeleteClient(string clientId)
+        public async Task<HttpStatusCode> DeleteEmployee(string employeeId)
         {
             HttpClient httpClient = new HttpClient();
-            HttpResponseMessage response = await httpClient.DeleteAsync(baseUrl + clientsURL + clientId);
+            HttpResponseMessage response = await httpClient.DeleteAsync(baseUrl + employeesURL + employeeId);
             httpClient.Dispose();
             return response.StatusCode;
         }

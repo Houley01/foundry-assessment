@@ -13,21 +13,21 @@
             <h2>Employee</h2>
             <p></p>
             <p>
-                <a class="btn btn-default" href="~/Employee">View Employee &raquo;</a>
+                <a class="btn btn-default" href="./Employee">View Employee &raquo;</a>
             </p>
         </div>
         <div class="col-md-4">
             <h2>Client</h2>
             <p></p>
             <p>
-                <a class="btn btn-default" href="~/Client">View Clients &raquo;</a>
+                <a class="btn btn-default" href="./Client">View Clients &raquo;</a>
             </p>
         </div>
         <div class="col-md-4">
             <h2>Engagements</h2>
             <p></p>
             <p>
-                <a class="btn btn-default" href="~/Engagements">View Engagements &raquo;</a>
+                <a class="btn btn-default" href="./Engagements">View Engagements &raquo;</a>
             </p>
         </div>
     </div>
