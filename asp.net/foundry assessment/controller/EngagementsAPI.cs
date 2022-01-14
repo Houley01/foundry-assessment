@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System;
 using System.Text;
 using System.Net.Http.Headers;
+using RestSharp;
 
 namespace foundry_assessment.controller
 {
@@ -71,14 +72,42 @@ namespace foundry_assessment.controller
             return engagementDetails; 
         }
 
-        public void Create(CreateEngagements engagements)
+        public HttpStatusCode Create(CreateEngagements engagements)
         {
-
+            HttpClient httpClient = new HttpClient();
+            string jsonInput = JsonConvert.SerializeObject(engagements);
+            var content = new StringContent(jsonInput, Encoding.UTF8, "application/json");
+            var results = httpClient.PostAsync(baseUrl + engagementsURL, content).Result;
+            return results.StatusCode;
         }
-        public void Update(UpdateEngagment details) { }
 
-        public void Delete(string id) { }
+        public void Update(UpdateEngagment details) 
+        {
+            HttpClient httpClient = new HttpClient();
+           
+            string jsonInput = JsonConvert.SerializeObject(details);
+            var content = new StringContent(jsonInput, Encoding.UTF8, "application/json");
+            var results = httpClient.PutAsync(baseUrl + engagementsURL + details.id, content).Result;
+            Console.WriteLine(results.StatusCode);
 
-        public void End(string id) { }
+            // Kill http client
+            httpClient.Dispose();
+        }
+
+        public async Task<HttpStatusCode> Delete(string id) 
+        {
+            HttpClient httpClient = new HttpClient();
+            HttpResponseMessage responseMessage = await httpClient.DeleteAsync(baseUrl + engagementsURL + id);
+            httpClient.Dispose();
+            return responseMessage.StatusCode;
+        }
+
+        public async Task EndAsync(string id) 
+        {
+            var url = baseUrl + engagementsURL;
+            RestClient client = new RestClient(url);
+            var request = new RestRequest(id + "/end", Method.Put);
+            var respones = await client.ExecuteAsync(request);
+        }
     }
 }

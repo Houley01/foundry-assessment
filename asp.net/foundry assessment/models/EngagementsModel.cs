@@ -30,8 +30,8 @@ namespace foundry_assessment.models
     public class CreateEngagements
     {
         public string name { get; set; }
-        public string clientId { get; set; }
-        public string employeeId { get; set; }
+        public string client { get; set; }
+        public string employee { get; set; }
         public string description { get; set; }
 
     }

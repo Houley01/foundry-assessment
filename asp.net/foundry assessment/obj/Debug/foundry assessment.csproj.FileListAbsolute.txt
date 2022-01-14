@@ -146,3 +146,23 @@ D:\WorkData\Desktop\projects\foundry-assessment\asp.net\foundry assessment\obj\D
 D:\WorkData\Desktop\projects\foundry-assessment\asp.net\foundry assessment\obj\Debug\foundry assessment.csproj.CopyComplete
 D:\WorkData\Desktop\projects\foundry-assessment\asp.net\foundry assessment\obj\Debug\foundry assessment.dll
 D:\WorkData\Desktop\projects\foundry-assessment\asp.net\foundry assessment\obj\Debug\foundry assessment.pdb
+D:\WorkData\Desktop\projects\foundry-assessment\asp.net\foundry assessment\bin\Microsoft.Bcl.AsyncInterfaces.dll
+D:\WorkData\Desktop\projects\foundry-assessment\asp.net\foundry assessment\bin\RestSharp.dll
+D:\WorkData\Desktop\projects\foundry-assessment\asp.net\foundry assessment\bin\System.Buffers.dll
+D:\WorkData\Desktop\projects\foundry-assessment\asp.net\foundry assessment\bin\System.Memory.dll
+D:\WorkData\Desktop\projects\foundry-assessment\asp.net\foundry assessment\bin\System.Numerics.Vectors.dll
+D:\WorkData\Desktop\projects\foundry-assessment\asp.net\foundry assessment\bin\System.Runtime.CompilerServices.Unsafe.dll
+D:\WorkData\Desktop\projects\foundry-assessment\asp.net\foundry assessment\bin\System.Text.Encodings.Web.dll
+D:\WorkData\Desktop\projects\foundry-assessment\asp.net\foundry assessment\bin\System.Text.Json.dll
+D:\WorkData\Desktop\projects\foundry-assessment\asp.net\foundry assessment\bin\System.Threading.Tasks.Extensions.dll
+D:\WorkData\Desktop\projects\foundry-assessment\asp.net\foundry assessment\bin\System.ValueTuple.dll
+D:\WorkData\Desktop\projects\foundry-assessment\asp.net\foundry assessment\bin\Microsoft.Bcl.AsyncInterfaces.xml
+D:\WorkData\Desktop\projects\foundry-assessment\asp.net\foundry assessment\bin\RestSharp.xml
+D:\WorkData\Desktop\projects\foundry-assessment\asp.net\foundry assessment\bin\System.Buffers.xml
+D:\WorkData\Desktop\projects\foundry-assessment\asp.net\foundry assessment\bin\System.Memory.xml
+D:\WorkData\Desktop\projects\foundry-assessment\asp.net\foundry assessment\bin\System.Numerics.Vectors.xml
+D:\WorkData\Desktop\projects\foundry-assessment\asp.net\foundry assessment\bin\System.Runtime.CompilerServices.Unsafe.xml
+D:\WorkData\Desktop\projects\foundry-assessment\asp.net\foundry assessment\bin\System.Text.Encodings.Web.xml
+D:\WorkData\Desktop\projects\foundry-assessment\asp.net\foundry assessment\bin\System.Text.Json.xml
+D:\WorkData\Desktop\projects\foundry-assessment\asp.net\foundry assessment\bin\System.Threading.Tasks.Extensions.xml
+D:\WorkData\Desktop\projects\foundry-assessment\asp.net\foundry assessment\bin\System.ValueTuple.xml
