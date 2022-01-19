@@ -1,0 +1,55 @@
+﻿@page
+@using ASP.NET_Core_Razor.Model;
+@using ASP.NET_Core_Razor.API;
+@model ASP.NET_Core_Razor.Pages.EngagementModel
+@{
+    ViewData["Title"] = "Engagements";
+    List<EngagementDetails> engagementList = new List<EngagementDetails>();
+    EngagementAPI engagementAPI = new EngagementAPI();
+    engagementList = engagementAPI.Read();
+}
+<div>
+    <h1>Engagements List</h1>
+    <a asp-page="./Engagement/Create" ><button style="btn btn-primary">Create Engagement</button></a> 
+    <div>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th style="width: 350px;">Name</th>
+                    <th style="width: 450px;">Description</th>
+                    <th style="width: 350px;">Client Name</th>
+                    <th style="width: 350px;">Employee Name</th>
+                    <th style="width: 350px;">Date Started</th>
+                    <th style="width: 350px;">Date Ended</th>
+                    <th> </th>
+                </tr>
+            </thead>
+            @{
+               
+                foreach (EngagementDetails engagement in engagementList)
+                    {
+                    <tr>
+                        <td>@engagement.name</td>
+                        <td>@engagement.description</td>
+                        <td>@engagement.client.name</td>
+                        <td>@engagement.employee.name</td>
+                        <td>@engagement.started</td>
+                        <td>@engagement.ended</td>
+
+
+                        <td>
+                            <a asp-page="./Engagement/Edit" asp-route-id="@engagement.id">Edit</a> |
+                            @* Going to look at when pressing this button it will show a list of Engagements
+                            <a asp-page="./Engagement/Details" asp-route-id="@engagement.id">Details</a> | *@
+                            <a asp-page="./Engagement/Delete" asp-route-id="@engagement.id">Delete</a>
+                            <form method="post">
+                                <input type="hidden" />
+                                <a asp-page="./Engagement/End" asp-route-id="@engagement.id">End</a>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }          
+        </table>
+    </div>
+</div>
