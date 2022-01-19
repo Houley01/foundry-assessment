@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Employee\" />
     <Folder Include="Pages\Engagement\" />
   </ItemGroup>
 

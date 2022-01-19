@@ -10,14 +10,14 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 
 
-
-namespace ASP.NET_Core_Razor.Pages.Client
+namespace ASP.NET_Core_Razor.Pages.Employee
 {
     public class EditModel : PageModel
     {
         [BindProperty]
-        public ClientClass clientClass { get; set; }
-        public ClientsApi api = new ClientsApi();
+        public EmployeeClass employee { get; set; } 
+
+        public EmployeeAPI employeeAPI = new EmployeeAPI();
         public IActionResult OnGet(string id)
         {
             if (id == null)
@@ -25,9 +25,9 @@ namespace ASP.NET_Core_Razor.Pages.Client
                 return NotFound();
             }
 
-            clientClass = api.FindClientById(id);
+            employee = employeeAPI.FindEmployeeByID(id);
 
-            if (clientClass == null)
+            if (employee == null)
             {
                 return NotFound();
             }
@@ -38,16 +38,16 @@ namespace ASP.NET_Core_Razor.Pages.Client
         {
             try
             {
-                api.UpdateClient(clientClass);
+                employeeAPI.UpdateEmployee(employee);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-         
-            
-            return RedirectToPage("../Client");
-            
+
+
+            return RedirectToPage("../Employee");
+
         }
     }
 }
