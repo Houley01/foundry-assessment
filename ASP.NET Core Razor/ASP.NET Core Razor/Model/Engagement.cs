@@ -15,7 +15,7 @@
     {
         public string id { get; set; }
         public string name { get; set; }
-        public ClientsClass client { get; set; }
+        public ClientClass client { get; set; }
         public EmployeeClass employee { get; set; }
         public string description { get; set; }
         public DateTime started { get; set; }

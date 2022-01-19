@@ -1,6 +1,6 @@
 ﻿namespace ASP.NET_Core_Razor.Model
 {
-    public class ClientsClass
+    public class ClientClass
     {
         public string id { get; set; }
         public string name { get; set; }
