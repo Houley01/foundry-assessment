@@ -41,6 +41,31 @@ namespace ASP.NET_Core_Razor.API
             return engagementDetails;
         }
 
+        public UpdateEngagment GetUpdateEngagmentByID(string id)
+        {
+            UpdateEngagment engagment = new UpdateEngagment();
+            EngagementModel temp = new EngagementModel();
+            HttpClient httpClient = new HttpClient();
+            httpClient.BaseAddress = new Uri(baseUrl);
+            var consumeAPI = httpClient.GetAsync("engagements/"+id);
+            consumeAPI.Wait();
+
+            var readData = consumeAPI.Result;
+            if (readData.IsSuccessStatusCode)
+            {
+                // Convert Json Data Input into C# Objects
+                var jsonString = readData.Content.ReadAsStringAsync();
+                temp = JsonConvert.DeserializeObject<EngagementModel>(jsonString.Result);
+            }
+
+            engagment.id = temp.id;
+            engagment.name = temp.name;
+            engagment.description = temp.description;
+            
+            httpClient.Dispose();
+            return engagment;
+        }
+
         private List<EngagementDetails> GetDetails(List<EngagementModel> engagementModel)
         {
             List<EngagementDetails> engagementDetails = new List<EngagementDetails>();
@@ -61,11 +86,19 @@ namespace ASP.NET_Core_Razor.API
                 temp.ended = engagement.ended;
                 foreach (var emp in empData)
                 {
-                    if (engagement.employee == emp.id) temp.employee = emp; break;
+                    if (engagement.employee == emp.id) 
+                    { 
+                        temp.employee = emp; 
+                        break; 
+                    }
                 }
                 foreach (var client in clientData)
                 {
-                    if (engagement.client == client.id) temp.client = client; break;
+                    if (engagement.client == client.id) 
+                    { 
+                        temp.client = client; 
+                        break;
+                    }
                 }
                 engagementDetails.Add(temp);
             }
