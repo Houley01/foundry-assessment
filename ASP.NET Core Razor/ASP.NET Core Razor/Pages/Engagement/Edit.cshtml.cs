@@ -16,6 +16,7 @@ namespace ASP.NET_Core_Razor.Pages.Engagement
         [BindProperty]
         public UpdateEngagment engagement { get; set; }
         public EngagementAPI api = new EngagementAPI();
+        public Model.EngagementModel engagementModel = new Model.EngagementModel();
         public IActionResult OnGet(string id)
         {
             if (id == null)
@@ -23,8 +24,10 @@ namespace ASP.NET_Core_Razor.Pages.Engagement
                 return NotFound();
             }
 
-            engagement = api.GetUpdateEngagmentByID(id);
-
+            engagementModel = api.FindEngagementByID(id);
+            engagement.id = engagementModel.id;
+            engagement.name = engagementModel.name;
+            engagement.description = engagementModel.description;
             if (engagement == null)
             {
                 return NotFound();

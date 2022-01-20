@@ -41,10 +41,9 @@ namespace ASP.NET_Core_Razor.API
             return engagementDetails;
         }
 
-        public UpdateEngagment GetUpdateEngagmentByID(string id)
+        public EngagementModel FindEngagementByID(string id)
         {
-            UpdateEngagment engagment = new UpdateEngagment();
-            EngagementModel temp = new EngagementModel();
+            EngagementModel engagment = new EngagementModel();
             HttpClient httpClient = new HttpClient();
             httpClient.BaseAddress = new Uri(baseUrl);
             var consumeAPI = httpClient.GetAsync("engagements/"+id);
@@ -55,13 +54,8 @@ namespace ASP.NET_Core_Razor.API
             {
                 // Convert Json Data Input into C# Objects
                 var jsonString = readData.Content.ReadAsStringAsync();
-                temp = JsonConvert.DeserializeObject<EngagementModel>(jsonString.Result);
+                engagment = JsonConvert.DeserializeObject<EngagementModel>(jsonString.Result);
             }
-
-            engagment.id = temp.id;
-            engagment.name = temp.name;
-            engagment.description = temp.description;
-            
             httpClient.Dispose();
             return engagment;
         }

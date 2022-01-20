@@ -6,9 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ASP.NET_Core_Razor.Model;
 using ASP.NET_Core_Razor.API;
+
 namespace ASP.NET_Core_Razor.Pages.Engagement
 {
-    public class DeleteModel : PageModel
+    public class EndModel : PageModel
     {
         [BindProperty]
         public Model.EngagementModel engagementModel { get; set; }
@@ -33,7 +34,7 @@ namespace ASP.NET_Core_Razor.Pages.Engagement
         {
             try
             {
-                await api.Delete(engagementModel.id);
+                await api.EndAsync(engagementModel.id);
             }
             catch (Exception ex)
             {
@@ -46,3 +47,4 @@ namespace ASP.NET_Core_Razor.Pages.Engagement
         }
     }
 }
+

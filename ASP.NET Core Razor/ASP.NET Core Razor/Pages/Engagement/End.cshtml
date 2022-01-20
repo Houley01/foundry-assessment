@@ -1,12 +1,13 @@
 ﻿@page
-@model ASP.NET_Core_Razor.Pages.Engagement.DeleteModel
+@model ASP.NET_Core_Razor.Pages.Engagement.EndModel
+
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "End";
 }
 
-<h1>Delete</h1>
+<h1>End</h1>
 <div>
-    <h3>Are you sure you want to delete this</h3>
+    <h3>Are you sure you want to End this</h3>
     <h4>This Engagement with the following details</h4>
     <hr />
     <dl class="row">
@@ -28,7 +29,7 @@
     
     <form method="post">
         <input type="hidden" asp-for="engagementModel.id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <input type="submit" value="End" class="btn btn-danger" /> |
         <a asp-page="../Engagement">Back to List</a>
     </form>
 </div>
