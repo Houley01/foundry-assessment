@@ -1,0 +1,35 @@
+﻿@page
+@model ASP.NET_Core_Razor.Pages.Engagement.EndModel
+
+@{
+    ViewData["Title"] = "End";
+}
+
+<h1>End</h1>
+<div>
+    <h3>Are you sure you want to End this</h3>
+    <h4>This Engagement with the following details</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Engagment Name:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.engagementModel.name)
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            Engagment Description:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.engagementModel.description)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="engagementModel.id" />
+        <input type="submit" value="End" class="btn btn-danger" /> |
+        <a asp-page="../Engagement">Back to List</a>
+    </form>
+</div>

@@ -1,0 +1,47 @@
+﻿@page
+@model ASP.NET_Core_Razor.Pages.EmployeeModel
+@using ASP.NET_Core_Razor.Model;
+@using ASP.NET_Core_Razor.API;
+@{
+    ViewData["title"] = "Employee Informations";
+}
+<div> 
+
+    <form method="post">
+        Employee Name: <input type="text" asp-for="NewEmployeeName" />
+        <button type="submit">Register Employee</button>
+    </form>
+    <br />
+    <hr />
+    <h1>Employee List</h1>
+    <div>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th style="width: 350px;">Id</th>
+                    <th style="width: 350px;">Name</th>
+                    <th> </th>
+                </tr>
+            </thead>
+            @{
+
+                List<EmployeeClass> employeeList = new List<EmployeeClass>();
+                EmployeeAPI employeeAPI = new EmployeeAPI();
+                employeeList = employeeAPI.ReadEmployees();
+                foreach (EmployeeClass employee in employeeList)
+                    {
+                    <tr>
+                        <td>@employee.id</td>
+                        <td>@employee.name</td>
+                        <td>
+                            <a asp-page="./Employee/Edit" asp-route-id="@employee.id">Edit</a> |
+                            @* Going to look at when pressing this button it will show a list of Engagements
+                            <a asp-page="./Client/Details" asp-route-id="@employee.id">Details</a> | *@
+                            <a asp-page="./Employee/Delete" asp-route-id="@employee.id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }          
+        </table>
+    </div>
+</div>

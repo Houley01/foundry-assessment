@@ -1,0 +1,46 @@
+﻿@page
+@using ASP.NET_Core_Razor.Model;
+@using ASP.NET_Core_Razor.API;
+@model ASP.NET_Core_Razor.Pages.ClientModel; 
+@{
+    ViewData["title"] = "Client List ";
+}
+<div> 
+
+    <form method="post">
+        Clients Name: <input type="text" asp-for="Name" />
+        <button type="submit">Register Client</button>
+    </form>
+    <br />
+    <hr />
+    <h1>Client List</h1>
+    <div>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th style="width: 350px;">Id</th>
+                    <th style="width: 350px;">Name</th>
+                    <th> </th>
+                </tr>
+            </thead>
+            @{
+                List<ClientClass> clientList = new List<ClientClass>();
+                ClientsApi clientsApi = new ClientsApi();
+                clientList = clientsApi.ReadClients();
+                foreach (ClientClass client in clientList)
+                    {
+                    <tr>
+                        <td>@client.id</td>
+                        <td>@client.name</td>
+                        <td>
+                            <a asp-page="./Client/Edit" asp-route-id="@client.id">Edit</a> |
+                            @* Going to look at when pressing this button it will show a list of Engagements
+                            <a asp-page="./Client/Details" asp-route-id="@client.id">Details</a> | *@
+                            <a asp-page="./Client/Delete" asp-route-id="@client.id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }          
+        </table>
+    </div>
+</div>
