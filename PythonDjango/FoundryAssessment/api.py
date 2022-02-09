@@ -18,6 +18,17 @@ def GetClientByID(id):
     data = r.json()
     return ClientData(data['id'], data['name'])
 
+def CreateClient(request):
+    URL = baseUrl + "clients" 
+    r = requests.post(url = URL)
+    data = r.json()
+   
+def UpdateClient(): 
+    print("updated")
+
+def DeleteClient():
+    print("Delete")
+
 # Employee Functions
 def GetEmployeeList(): 
     URL = baseUrl + "employees" 
@@ -33,6 +44,15 @@ def GetEmployeeByID(id):
     r = requests.get(url = URL)
     data = r.json()
     return ClientData(data['id'], data['name'])
+
+def CreateEmployee():
+    print("create")
+
+def UpdateEmployee(): 
+    print("updated")
+
+def DeleteEmployee():
+    print("Delete")
 
 # Engagments Functions
 def GetEngagmentsList():
@@ -65,3 +85,16 @@ def GetEngagmentsList():
             )
         engagementList.append(tempData)
     return engagementList
+
+def CreateEngagents():
+    print("create")
+
+def UpdateEngagents(): 
+    print("updated")
+
+def DeleteEngagement():
+    print("Delete")
+
+def EndEngagement():
+    print("END")
+

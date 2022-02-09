@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Engagements - Foundry Assessment Django</title>
-</head>
-<body>
-    </body>
-    
-    </html><button style="btn btn-primary">Create Engagement</button>
-    <div>
+{% extends "base.html" %}
+
+{% block title %}Engagements{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <button style="btn btn-primary">Create Engagement</button>
+    </div>
+    <div class="container">
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
@@ -45,6 +41,4 @@
             {% endfor %}
         </table>
     </div>
-</div>
-</body>
-</html>
+{% endblock %}

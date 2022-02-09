@@ -18,7 +18,6 @@ def employees(request):
     context = {'employeeList': dataList}
     return render(request, 'employees/employee.html', context)
 
-
 def engagements(request):
     dataList = GetEngagmentsList()
     context = {'engagementList': dataList}
