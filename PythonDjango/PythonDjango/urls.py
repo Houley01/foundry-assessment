@@ -16,11 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from FoundryAssessment.views import index, clients
+from FoundryAssessment.views import *
 
 urlpatterns = [
     path('',index, name='index_page' ),
-    path('clients',clients , name='clients_page' ),
+    path('clients/', clients, name='Clients_page' ),
+    path('employee/', employees, name='Employee_page' ),
+    path('engagement/', engagements, name='Engagement_page'),
     path('FoundryAssessment/', include('FoundryAssessment.urls')),
     path('admin/', admin.site.urls),
 ]
