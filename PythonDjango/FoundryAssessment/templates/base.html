@@ -21,17 +21,32 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="{% url 'index_page'%}">Home</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Clients
+                            </a>
+                            <ul class="text-dark dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item nav-link text-dark" href="{% url 'Clients_page'%}">View Clients</a></li>
+                                <li><a class="dropdown-item nav-link text-dark" href="{% url 'Create_Client_Page'%}">Create Clients</a></li>
+                            </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="{% url 'Clients_page'%}">Clients</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Employee
+                            </a>
+                            <ul class="text-dark dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item nav-link text-dark" href="{% url 'Employee_page'%}">View Employees</a></li>
+                                <li><a class="dropdown-item nav-link text-dark" href="#">Create Employee</a></li>
+                            </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="{% url 'Employee_page'%}">Employees</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="{% url 'Engagement_page'%}">Engagements</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Engagements
+                            </a>
+                            <ul class="text-dark dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item nav-link text-dark" href="{% url 'Engagement_page'%}">View Engagements</a></li>
+                                <li><a class="dropdown-item nav-link text-dark" href="#">Create Engagement</a></li>
+                            </ul>
                         </li>
                     </ul>
                 </div>

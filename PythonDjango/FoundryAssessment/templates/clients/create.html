@@ -1,0 +1,17 @@
+{% extends 'base.html' %}   
+{% block title %} Create New Client {% endblock  %}
+{% block content %}
+
+
+
+    <div class="container">
+        <form action="{% url 'Create_Client_Page'%}" method="post">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Clients Name</span>
+                <input type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="Name of client" id="client_name" name="client_name" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Create Client</button>
+        </form>
+    </div>
+{% endblock %}

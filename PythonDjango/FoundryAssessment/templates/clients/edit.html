@@ -1,0 +1,22 @@
+{% extends 'base.html' %}   
+{% block title %} Edit Client {% endblock  %}
+{% block content %}
+
+
+    <div class="container">
+        <h1> Editing client </h1>
+        <h2>Client Current Name: {{data.name}}</h2>
+    </div>
+    <div class="container">
+        <form action="{{data.id}}" method="post">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Replacement Name for Client</span>
+                <input type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="Name of client" 
+                id="client_name" name="client_name" required value="{{data.name}}">
+                <input type="hidden" value="{{data.id}}" name="client_id" id="client_id">
+            </div>
+            <button type="submit" class="btn btn-primary">Update Client</button>
+        </form>
+    </div>
+{% endblock %}

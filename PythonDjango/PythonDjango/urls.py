@@ -21,6 +21,8 @@ from FoundryAssessment.views import *
 urlpatterns = [
     path('',index, name='index_page' ),
     path('clients/', clients, name='Clients_page' ),
+    path('clients/create', createClient, name='Create_Client_Page'),
+    path('clients/edit/<str:id>', editClient, name='Edit_Client_Page'),
     path('employee/', employees, name='Employee_page' ),
     path('engagement/', engagements, name='Engagement_page'),
     path('FoundryAssessment/', include('FoundryAssessment.urls')),

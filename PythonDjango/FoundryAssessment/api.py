@@ -18,13 +18,21 @@ def GetClientByID(id):
     data = r.json()
     return ClientData(data['id'], data['name'])
 
-def CreateClient(request):
+def CreateClient(client_name):
     URL = baseUrl + "clients" 
-    r = requests.post(url = URL)
-    data = r.json()
+    # jsonData = 
+    r = requests.post(url = URL, json={
+    "name": client_name,
+    })
+    print(f"Status Code: {r.status_code}, Response: {r.json()}")
    
-def UpdateClient(): 
-    print("updated")
+def UpdateClient(client): 
+    URL = baseUrl + "clients/" + client.id
+    # jsonData = 
+    r = requests.put(url = URL, json={
+    "name": client.name,
+    })
+    print(f"Status Code: {r.status_code}, Response: {r.json()}")
 
 def DeleteClient():
     print("Delete")
