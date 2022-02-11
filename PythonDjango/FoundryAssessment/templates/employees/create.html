@@ -1,0 +1,14 @@
+{% extends 'base.html' %}   
+{% block title %} Create New Employee {% endblock  %}
+{% block content %}
+    <div class="container">
+        <form action="{% url 'Create_Employee_Page'%}" method="post">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Employee's Name</span>
+                <input type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="Name of Employee" id="employee_name" name="employee_name" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Employee Employee</button>
+        </form>
+    </div>
+{% endblock %}

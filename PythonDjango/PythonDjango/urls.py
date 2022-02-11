@@ -20,11 +20,17 @@ from FoundryAssessment.views import *
 
 urlpatterns = [
     path('',index, name='index_page' ),
+    # Clients URLS
     path('clients/', clients, name='Clients_page' ),
     path('clients/create', createClient, name='Create_Client_Page'),
     path('clients/edit/<str:id>', editClient, name='Edit_Client_Page'),
+    # Employee URLS 
     path('employee/', employees, name='Employee_page' ),
+    path('employees/create', createEmployee, name='Create_Employee_Page'),
+    path('employee/edit/<str:id>', editEmployee, name='Edit_Employee_Page'),
+    # Engagement  URLS
     path('engagement/', engagements, name='Engagement_page'),
+    # Others
     path('FoundryAssessment/', include('FoundryAssessment.urls')),
     path('admin/', admin.site.urls),
 ]

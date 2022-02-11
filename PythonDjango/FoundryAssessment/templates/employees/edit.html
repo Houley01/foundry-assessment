@@ -1,0 +1,20 @@
+{% extends 'base.html' %}   
+{% block title %} Edit Employee {% endblock  %}
+{% block content %}
+    <div class="container">
+        <h1> Editing Employee </h1>
+        <h2>Employee Current Name: {{data.name}}</h2>
+    </div>
+    <div class="container">
+        <form action="{{data.id}}" method="post">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Replacement Name for Employee</span>
+                <input type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="Name of employee" 
+                id="employee_name" name="employee_name" required value="{{data.name}}">
+                <input type="hidden" value="{{data.id}}" name="employee_id" id="employee_id">
+            </div>
+            <button type="submit" class="btn btn-primary">Update Employee</button>
+        </form>
+    </div>
+{% endblock %}

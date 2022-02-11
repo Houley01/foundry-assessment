@@ -16,19 +16,15 @@
                     <td>{{employee.id}}</td>
                     <td>{{employee.name}}</td>
                     <td>
-                        <a>Edit</a> |
-                        <a>Delete</a>
+                        <form method="post" action="{% url 'Employee_page'%}">
+                            {% csrf_token %}
+                            <a href="edit/{{employee.id}}">Edit</a> |
+                            <input type="hidden" value="{{employee.id}}" name="employee_id" id="employee_id">
+                            <button type="submit" class="text-look-a-like">Delete</button>
+                        </form>
                     </td> 
                 </tr>        
             {% endfor %}
         </table>
     </div>
-    <div class="container">
-        <form method="post" >
-            {% csrf_token %}
-            Employee Name: <input type="text" name="Name" />
-            <button type="submit">Register Employee</button>
-        </form>
-    </div>
-
 {% endblock  %}

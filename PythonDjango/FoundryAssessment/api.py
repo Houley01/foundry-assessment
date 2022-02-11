@@ -2,6 +2,8 @@ import requests, asyncio
 from .models import *
 baseUrl = "http://localhost:5000/"
 clientURl = "clients/"
+employeeURL = "employees/"
+
 # Client Functions
 def GetClientList(): 
     URL = baseUrl + clientURl
@@ -40,7 +42,7 @@ def DeleteClient(id):
 
 # Employee Functions
 def GetEmployeeList(): 
-    URL = baseUrl + "employees" 
+    URL = baseUrl + employeeURL
     r = requests.get(url = URL)
     data = r.json()
     employeeList = []
@@ -49,19 +51,31 @@ def GetEmployeeList():
     return employeeList
 
 def GetEmployeeByID(id):
-    URL = baseUrl + "employees/" + id 
+    URL = baseUrl + employeeURL + id 
     r = requests.get(url = URL)
     data = r.json()
-    return ClientData(data['id'], data['name'])
+    return EmployeeData(data['id'], data['name'])
 
-def CreateEmployee():
+def CreateEmployee(employee_name):
     print("create")
+    URL = baseUrl + employeeURL 
+    r = requests.post(url = URL, json={
+    "name": employee_name,
+    })
+    print(f"Status Code: {r.status_code}, Response: {r.json()}")
+   
+def UpdateEmployee(employee): 
+    print("updated") 
+    URL = baseUrl + employeeURL + employee.id
+    r = requests.put(url = URL, json={
+    "name": employee.name,
+    })
+    print(f"Status Code: {r.status_code}, Response: {r.json()}")
 
-def UpdateEmployee(): 
-    print("updated")
-
-def DeleteEmployee():
-    print("Delete")
+def DeleteEmployee(id):
+    URL = baseUrl + employeeURL + id
+    r = requests.delete(url = URL)
+    print(f"Status Code: {r.status_code}, Response: {r.json()}")
 
 # Engagments Functions
 def GetEngagmentsList():

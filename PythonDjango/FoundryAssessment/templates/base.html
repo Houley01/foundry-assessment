@@ -14,7 +14,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">Foundry Assessment in Python Django</a>
+                <a class="navbar-brand" href="{%url 'index_page' %}">Foundry Assessment in Python Django</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -36,7 +36,7 @@
                             </a>
                             <ul class="text-dark dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <li><a class="dropdown-item nav-link text-dark" href="{% url 'Employee_page'%}">View Employees</a></li>
-                                <li><a class="dropdown-item nav-link text-dark" href="#">Create Employee</a></li>
+                                <li><a class="dropdown-item nav-link text-dark" href="{% url 'Create_Employee_Page'%}">Create Employee</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">

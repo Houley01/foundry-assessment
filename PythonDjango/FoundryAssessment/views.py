@@ -7,14 +7,11 @@ import requests
 from .forms import *
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the Home index.")
+    return render(request, 'index.html')
 
 def clients(request):
-
     if request.method == 'POST':
         DeleteClient(request.POST.get("client_id"))
-        # messages.info(request, 'You have clicked delete account!') 
-        # return render(request, 'clients/client.html', context )
     # Do standand func and display data
     clientList = GetClientList()
     context = {'client_list': clientList}
@@ -30,7 +27,6 @@ def createClient(request):
             return HttpResponseRedirect('/clients')
     # Create a blank form
     else:
-        # form = CreateClientForm()
         return render(request, 'clients/create.html')
 
 def editClient(request, id): 
@@ -47,10 +43,35 @@ def editClient(request, id):
         return render(request, 'clients/edit.html', context)
 
 def employees(request):
-    # print('Employee REQ')
+    if request.method == 'POST':
+        DeleteEmployee(request.POST.get("employee_id"))
+    # display standand data page
     dataList = GetEmployeeList()
     context = {'employeeList': dataList}
     return render(request, 'employees/employee.html', context)
+
+def createEmployee(request):
+    if request.method == 'POST':
+        form = CreateEmployeeForm(request.POST)
+        if form.is_valid():
+            # localation of req data request.POST.get("client_name")
+            CreateEmployee(request.POST.get("employee_name"))
+            return HttpResponseRedirect('/employee')
+    # Create a blank form
+    else:
+        return render(request, 'employees/create.html')
+
+def editEmployee(request, id): 
+    print(id)
+    if request.method == 'POST':
+        form = EditEmployeeForm(request.POST)
+        if form.is_valid():
+            UpdateEmployee(EmployeeData(request.POST.get("employee_id"), request.POST.get("employee_name")))
+            return HttpResponseRedirect('/employee')
+    # Create a blank form
+    else:
+        context = {'data': GetEmployeeByID(id)}
+        return render(request, 'employees/edit.html', context)
 
 def engagements(request):
     dataList = GetEngagmentsList()
