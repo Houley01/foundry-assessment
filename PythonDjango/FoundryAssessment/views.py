@@ -1,6 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.template import loader
+from django.contrib import messages
 from FoundryAssessment.api import *
 import requests
 from .forms import *
@@ -9,8 +10,15 @@ def index(request):
     return HttpResponse("Hello, world. You're at the Home index.")
 
 def clients(request):
+
+    if request.method == 'POST':
+        DeleteClient(request.POST.get("client_id"))
+        # messages.info(request, 'You have clicked delete account!') 
+        # return render(request, 'clients/client.html', context )
+    # Do standand func and display data
     clientList = GetClientList()
     context = {'client_list': clientList}
+    # messages.info(request, 'You have clicked delete account!') 
     return render(request, 'clients/client.html', context )
 
 def createClient(request):

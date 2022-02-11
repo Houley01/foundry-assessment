@@ -1,10 +1,10 @@
 import requests, asyncio
 from .models import *
 baseUrl = "http://localhost:5000/"
-
+clientURl = "clients/"
 # Client Functions
 def GetClientList(): 
-    URL = baseUrl + "clients" 
+    URL = baseUrl + clientURl
     r = requests.get(url = URL)
     data = r.json()
     clientList = []
@@ -19,7 +19,7 @@ def GetClientByID(id):
     return ClientData(data['id'], data['name'])
 
 def CreateClient(client_name):
-    URL = baseUrl + "clients" 
+    URL = baseUrl + clientURl 
     # jsonData = 
     r = requests.post(url = URL, json={
     "name": client_name,
@@ -27,15 +27,16 @@ def CreateClient(client_name):
     print(f"Status Code: {r.status_code}, Response: {r.json()}")
    
 def UpdateClient(client): 
-    URL = baseUrl + "clients/" + client.id
-    # jsonData = 
+    URL = baseUrl + clientURl + client.id
     r = requests.put(url = URL, json={
     "name": client.name,
     })
     print(f"Status Code: {r.status_code}, Response: {r.json()}")
 
-def DeleteClient():
-    print("Delete")
+def DeleteClient(id):
+    URL = baseUrl + clientURl + id
+    r = requests.delete(url = URL)
+    print(f"Status Code: {r.status_code}, Response: {r.json()}")
 
 # Employee Functions
 def GetEmployeeList(): 
